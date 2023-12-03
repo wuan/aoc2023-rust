@@ -10,12 +10,9 @@ fn puzzle(part: i32) {
 }
 
 fn analyze(lines: Vec<&str>, part: i32) -> usize {
-    let mut sum: usize = 0;
-
     let mut symbol_locations = lines.iter().map(|line| symbol_locations(line)).collect::<Vec<_>>();
-
+    let mut sum: usize = 0;
     for (line_index, line) in lines.iter().enumerate() {
-        // println!("{}: {}", line_index, line);
 
         for number_group in number_groups(line) {
             let mut has_symbol = false;
@@ -58,7 +55,7 @@ fn has_symbol_in_range(number_group: &NumberGroup, symbol_locations: &mut Vec<Sy
             return true;
         }
     }
-    return false;
+    false
 }
 
 struct NumberGroup {
@@ -81,7 +78,7 @@ fn number_groups(line: &str) -> Vec<NumberGroup> {
         }
     }
     _ = check_end_of_number(start, line.len(), line, &mut number_groups);
-    return number_groups;
+    number_groups
 }
 
 fn check_end_of_number(start: Option<usize>, index: usize, line: &str, number_groups: &mut Vec<NumberGroup>) -> Option<usize> {
@@ -91,9 +88,9 @@ fn check_end_of_number(start: Option<usize>, index: usize, line: &str, number_gr
             end: index - 1,
             number: line[start.unwrap()..index].parse().unwrap(),
         });
-        return None;
+        None
     } else {
-        return start;
+        start
     }
 }
 
@@ -121,7 +118,7 @@ fn symbol_locations(line: &str) -> Vec<Symbol> {
             symbol_locations.push(Symbol::new(index, character));
         }
     }
-    return symbol_locations;
+    symbol_locations
 }
 
 #[cfg(test)]
