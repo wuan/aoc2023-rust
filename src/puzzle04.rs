@@ -1,3 +1,4 @@
+use std::collections::HashSet;
 use std::fs::read_to_string;
 use std::str::Split;
 
@@ -60,24 +61,13 @@ fn parse_line(line: &str) -> (usize, usize) {
     let mut split1 = line.trim().split(':');
     let _card = split1.next().unwrap().trim();
     let mut split2 = split1.next().unwrap().trim().split('|');
-    let winning_numbers = extract_numbers(&mut split2);
-    let numbers = extract_numbers(&mut split2);
 
-    let mut win = 0;
-    let mut copy = 0;
+    let winning_numbers: HashSet<usize> = HashSet::from_iter(extract_numbers(&mut split2));
+    let numbers = HashSet::from_iter(extract_numbers(&mut split2));
 
-    for number in numbers {
-        if winning_numbers.contains(&number) {
-            if win == 0 {
-                win = 1;
-            } else {
-                win *= 2;
-            }
-            copy += 1;
-        }
-    }
+    let copy = numbers.intersection(&winning_numbers).count();
 
-    (win, copy)
+    (2^copy, copy)
 }
 
 fn extract_numbers(split2: &mut Split<char>) -> Vec<usize> {
