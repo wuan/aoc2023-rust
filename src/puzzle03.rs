@@ -6,7 +6,7 @@ fn puzzle(part: i32) {
     let lines = string.lines().collect::<Vec<_>>();
 
     let sum = analyze(lines, part);
-    println!("day 2 part {}: {}", part, sum)
+    println!("day 3 part {}: {}", part, sum)
 }
 
 fn analyze(lines: Vec<&str>, part: i32) -> usize {

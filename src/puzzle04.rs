@@ -6,14 +6,14 @@ fn puzzle(part: i32) {
     let lines = string.lines().collect::<Vec<_>>();
 
     let sum = analyze(lines, part);
-    println!("day 2 part {}: {}", part, sum)
+    println!("day 4 part {}: {}", part, sum)
 }
 
 fn analyze(lines: Vec<&str>, part: i32) -> usize {
     let mut sum: usize = 0;
     let mut copies: Vec<(usize, usize)> = Vec::new();
 
-    for (line_index, line) in lines.iter().enumerate() {
+    for (_, line) in lines.iter().enumerate() {
         let (win, copy) = parse_line(line);
         if part == 1 {
             sum += win;
@@ -58,7 +58,7 @@ fn fetch_copies(copies_store: &mut Vec<(usize,usize)>) -> usize {
 
 fn parse_line(line: &str) -> (usize, usize) {
     let mut split1 = line.trim().split(':');
-    let card = split1.next().unwrap().trim();
+    let _card = split1.next().unwrap().trim();
     let mut split2 = split1.next().unwrap().trim().split('|');
     let winning_numbers = extract_numbers(&mut split2);
     let numbers = extract_numbers(&mut split2);
