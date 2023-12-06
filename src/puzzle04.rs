@@ -67,7 +67,7 @@ fn parse_line(line: &str) -> (usize, usize) {
 
     let copy = numbers.intersection(&winning_numbers).count();
 
-    (2^copy, copy)
+    (1 << copy >> 1, copy)
 }
 
 fn extract_numbers(split2: &mut Split<char>) -> Vec<usize> {
