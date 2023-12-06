@@ -16,10 +16,7 @@ fn analyze(lines: Vec<&str>, part: i32) -> usize {
 
     let wins = times.iter().zip(distances.iter()).map(
         |(time, record_distance)| {
-            (1usize..*time).map(|charging_time| {
-                calculate_distance(charging_time, *time)
-            }).filter(|distance| distance > record_distance
-            ).count()
+            calculate_winning_solution_count(*time, *record_distance)
         }).collect::<Vec<usize>>();
 
     wins.iter().fold(1, |acc, win| acc * win)
@@ -37,6 +34,16 @@ fn parse_numbers(iter: &mut Iter<&str>, ignore_whitespace: bool) -> Vec<usize> {
 fn calculate_distance(charging_time: usize, total_time: usize) -> usize {
     let speed = charging_time;
     (total_time - charging_time) * speed
+}
+
+fn calculate_winning_solution_count(time: usize, distance: usize) -> usize {
+    let offset_to_ensure_higher_win = 0.5;
+
+    let base = time as f32 / 2.0;
+    let half = ((time * time) as f32 - 4.0 * (distance as f32 + offset_to_ensure_higher_win)).sqrt() / 2.0;
+    let lower = (base - half) as usize;
+    let upper = (base + half) as usize;
+    upper - lower
 }
 
 #[cfg(test)]
