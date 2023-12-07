@@ -4,6 +4,7 @@ mod puzzle03;
 mod puzzle04;
 mod puzzle05;
 mod puzzle06;
+mod puzzle07;
 
 fn main() {
     puzzle01::run();
@@ -12,4 +13,5 @@ fn main() {
     puzzle04::run();
     puzzle05::run();
     puzzle06::run();
+    puzzle07::run();
 }

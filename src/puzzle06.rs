@@ -31,11 +31,6 @@ fn parse_numbers(iter: &mut Iter<&str>, ignore_whitespace: bool) -> Vec<usize> {
     data.split_whitespace().map(|element| { element.parse::<usize>().unwrap() }).collect::<Vec<_>>()
 }
 
-fn calculate_distance(charging_time: usize, total_time: usize) -> usize {
-    let speed = charging_time;
-    (total_time - charging_time) * speed
-}
-
 fn calculate_winning_solution_count(time: usize, distance: usize) -> usize {
     let offset_to_ensure_higher_win = 0.5;
 
@@ -49,16 +44,6 @@ fn calculate_winning_solution_count(time: usize, distance: usize) -> usize {
 #[cfg(test)]
 mod tests {
     use super::*;
-
-    #[test]
-    fn test_calculate_distance() {
-        assert_eq!(calculate_distance(0, 7), 0);
-        assert_eq!(calculate_distance(1, 7), 6);
-        assert_eq!(calculate_distance(2, 7), 10);
-        assert_eq!(calculate_distance(3, 7), 12);
-        assert_eq!(calculate_distance(4, 7), 12);
-        assert_eq!(calculate_distance(5, 7), 10);
-    }
 
     #[test]
     fn test_complete() {
